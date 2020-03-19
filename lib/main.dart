@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:fossapp/prev.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:http/http.dart' as http;
 
@@ -34,28 +35,29 @@ String td = '00';
 String nc = '00';
 String up = "----/--/-- --:--";
 
+Future<http.Response> fetchData() async {
+  final response =
+      await http.get('http://hpb.health.gov.lk/api/get-current-statistical');
+  if (response.statusCode == 200) {
+    Map<String, dynamic> data = jsonDecode(response.body);
+    tc = data['data']['local_total_cases'].toString();
+    td = data['data']['local_deaths'].toString();
+    nc = data['data']['local_new_cases'].toString();
+    up = data['data']['update_date_time'].toString();
+  } else {
+    print('Error');
+  }
+}
+
+void initState(){
+  fetchData();
+}
+
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
-
-    Future<http.Response> fetchData() async {
-      final response = await http
-          .get('http://hpb.health.gov.lk/api/get-current-statistical');
-      if (response.statusCode == 200) {
-        Map<String, dynamic> data = jsonDecode(response.body);
-        tc = data['data']['local_total_cases'].toString();
-        td = data['data']['local_deaths'].toString();
-        nc = data['data']['local_new_cases'].toString();
-        up = data['data']['update_date_time'].toString();
-        print(nc);
-        print(tc);
-        print(td);
-      } else {
-        print('Error');
-      }
-    }
 
     OneSignal.shared.init("df0e685a-2818-43f7-8ecf-a873b48aa4f3");
     setState(() {
@@ -139,6 +141,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         'Total Deaths',
                         style: TextStyle(color: Colors.red, fontSize: 16),
                       ),
+                      Icon(
+                        Icons.airline_seat_individual_suite,
+                        color: Colors.red,
+                      ),
                       Text(
                         td,
                         style: TextStyle(
@@ -169,6 +175,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         'New Cases',
                         style: TextStyle(color: Colors.green, fontSize: 16),
                       ),
+                      Icon(
+                        Icons.note_add,
+                        color: Colors.green,
+                      ),
                       Text(
                         nc,
                         style: TextStyle(
@@ -181,6 +191,43 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ],
+          ),
+          Container(
+            width: w * 0.87,
+            height: h / 10,
+            margin: EdgeInsets.fromLTRB(0, 32, 0, 0),
+            child: RaisedButton(
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.0),
+                ),
+                color: Colors.red,
+                child: Text(
+                  'Main Symptoms',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () {}),
+          ),
+          Container(
+            width: w * 0.87,
+            height: h / 10,
+            margin: EdgeInsets.fromLTRB(0, 16, 0, 0),
+            child: RaisedButton(
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.0),
+                ),
+                color: Colors.green,
+                child: Text(
+                  'Prevention Methods',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Prevscr()),
+                  );
+                }),
           )
         ],
       )),
