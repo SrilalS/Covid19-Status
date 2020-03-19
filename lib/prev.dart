@@ -11,23 +11,134 @@ class _PrevscrState extends State<Prevscr> {
   @override
   Widget build(BuildContext context) {
     return Container(
-       child: Scaffold(
-         appBar: AppBar(),
-         body: SingleChildScrollView(
-           child: Column(
-             children: <Widget>[
+      child: Scaffold(
+        backgroundColor: Colors.grey[200],
+        appBar: AppBar(
+          title: Text('Prevention Methods'),
+        ),
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
 
-               Container(
-                 margin: EdgeInsets.all(8),
-                 child: Card(
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  margin: EdgeInsets.all(8),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    elevation: 4,
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(height:8),
+                        Image.asset(
+                          'assets/5.png',
+                          scale: 1,
+                        ),
+                        Text(
+                          
+                          'Wash your hands often',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height:8)
+                      ],
+                    ),
+                  ),
+                ),
 
-                 ),
-               )
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  margin: EdgeInsets.all(8),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    elevation: 4,
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(height:8),
+                        Image.asset(
+                          'assets/8.png',
+                          scale: 1,
+                        ),
+                        Text(
+                          'Cover your cough and sneeze using elbow',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height:8),
+                      ],
+                    ),
+                  ),
+                ),
 
-             ],
-           ),
-         ),
-       ),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  margin: EdgeInsets.all(8),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    elevation: 4,
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(height:8),
+                        Image.asset(
+                          'assets/6.png',
+                          scale: 1,
+                        ),
+                        Text(
+                          'Cover your cough and sneeze using a tissue and dispose tissue properly',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height:8),
+                      ],
+                    ),
+                  ),
+                ),
+
+
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  margin: EdgeInsets.all(8),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    elevation: 4,
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(height:8),
+                        Image.asset(
+                          'assets/7.png',
+                          scale: 1,
+                        ),
+                        Text(
+                          'Avoid crowded places',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height:8),
+                      ],
+                    ),
+                  ),
+                ),
+
+
+
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

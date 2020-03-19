@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:fossapp/prev.dart';
+import 'package:fossapp/symp.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:http/http.dart' as http;
 
@@ -34,7 +36,6 @@ String tc = '00';
 String td = '00';
 String nc = '00';
 String up = "----/--/-- --:--";
-
 Future<http.Response> fetchData() async {
   final response =
       await http.get('http://hpb.health.gov.lk/api/get-current-statistical');
@@ -45,12 +46,8 @@ Future<http.Response> fetchData() async {
     nc = data['data']['local_new_cases'].toString();
     up = data['data']['update_date_time'].toString();
   } else {
-    print('Error');
+    print('Mars First');
   }
-}
-
-void initState(){
-  fetchData();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -58,11 +55,13 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
-
-    OneSignal.shared.init("df0e685a-2818-43f7-8ecf-a873b48aa4f3");
-    setState(() {
-      fetchData();
+    Timer(Duration(milliseconds: 500), () {
+      setState(() {
+        fetchData();
+      });
     });
+    OneSignal.shared.init("df0e685a-2818-43f7-8ecf-a873b48aa4f3");
+    fetchData();
     return Scaffold(
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.refresh),
@@ -73,18 +72,20 @@ class _MyHomePageState extends State<MyHomePage> {
           }),
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text('COVID-19 Situation Report'),
-            Text(
-              up,
-              style: TextStyle(fontSize: 16),
-            )
-          ],
+        title: Center(
+          child: Column(
+            
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text('COVID-19 Situation Report'),
+              Text(
+                up,
+                style: TextStyle(fontSize: 16),
+              )
+            ],
+          ),
         ),
       ),
-      drawer: Drawer(),
       body: Center(
           child: Column(
         children: <Widget>[
@@ -206,7 +207,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   'Main Symptoms',
                   style: TextStyle(color: Colors.white),
                 ),
-                onPressed: () {}),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Sympscr()),
+                  );
+                }),
           ),
           Container(
             width: w * 0.87,
