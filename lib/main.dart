@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
-
-
-void main() => runApp(MyApp(
-));
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  
   @override
-  
   Widget build(BuildContext context) {
     return MaterialApp(
-
+      debugShowCheckedModeBanner: false,
       title: 'FOSS NSBM',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -23,27 +18,14 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  
   MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
-  
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-
-
 class _MyHomePageState extends State<MyHomePage> {
-  
-
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     OneSignal.shared.init("df0e685a-2818-43f7-8ecf-a873b48aa4f3");
@@ -52,11 +34,20 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Hello!',
-              style: TextStyle(fontSize:32),
+            Container(
+              child: Card(
+                elevation: 8.0,
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.all(32),
+                      child: Image.asset('assets/logo.png',height: 128, width: 128,),
+                    )
+                    
+                  ],
+                ),
+              ),
             ),
-            
           ],
         ),
       ),
