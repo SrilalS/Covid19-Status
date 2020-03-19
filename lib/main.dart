@@ -36,30 +36,30 @@ String tc = '00';
 String td = '00';
 String nc = '00';
 String up = "----/--/-- --:--";
-Future<http.Response> fetchData() async {
-  final response =
-      await http.get('http://hpb.health.gov.lk/api/get-current-statistical');
-  if (response.statusCode == 200) {
-    Map<String, dynamic> data = jsonDecode(response.body);
-    tc = data['data']['local_total_cases'].toString();
-    td = data['data']['local_deaths'].toString();
-    nc = data['data']['local_new_cases'].toString();
-    up = data['data']['update_date_time'].toString();
-  } else {
-    print('Mars First');
-  }
-}
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
-    Timer(Duration(milliseconds: 500), () {
-      setState(() {
-        fetchData();
-      });
-    });
+    Future<http.Response> fetchData() async {
+      final response = await http
+          .get('http://hpb.health.gov.lk/api/get-current-statistical');
+      if (response.statusCode == 200) {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        tc = data['data']['local_total_cases'].toString();
+        td = data['data']['local_deaths'].toString();
+        nc = data['data']['local_new_cases'].toString();
+        up = data['data']['update_date_time'].toString();
+        setState(() {
+          var a;
+        });
+      } else {
+        print('Mars First');
+      }
+    }
+
     OneSignal.shared.init("df0e685a-2818-43f7-8ecf-a873b48aa4f3");
     fetchData();
     return Scaffold(
@@ -74,7 +74,6 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Center(
           child: Column(
-            
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Text('COVID-19 Situation Report'),
