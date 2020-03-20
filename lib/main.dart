@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (BuildContext context) {
           return Center(
               child: Container(
-                  height: w/1.5,
+                  height: w/1.25,
                   
                   width: w/1.5,
                   child: Card(
@@ -64,13 +64,21 @@ class _MyHomePageState extends State<MyHomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        Text('Please Wash Your Hands!'),
-                        Image.asset('assets/hands.png', scale: 2,),
+                        SizedBox(height: 16,),
+                        Text('Please Wash Your Hands before Entering!', 
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                        SizedBox(height: 16,),
+                        Image.asset('assets/hands.png', scale: 2.5,),
+                        SizedBox(height: 16,),
                         RaisedButton(
+                          elevation: 4,
+                          color: Colors.red,
+                          splashColor: Colors.redAccent,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(32.0),
                           ),
-                          child: Text('Okay'),
+                          child: Text('Okay', style: TextStyle(color:Colors.white),),
                           onPressed: (){
                           Navigator.pop(context);
                         }),
