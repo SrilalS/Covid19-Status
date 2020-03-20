@@ -137,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     child: Text('View Source on GitHub'),
                     onPressed: () async {
-                      const url = 'https://healthpromo.gov.lk/';
+                      const url = 'https://github.com/SrilalS/Covid19-Status/';
                       if (await canLaunch(url)) {
                         await launch(url);
                       } else {
