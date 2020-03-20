@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:fossapp/prev.dart';
 import 'package:fossapp/symp.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 void main() => runApp(MyApp());
 
@@ -37,10 +37,12 @@ String td = '00';
 String nc = '00';
 String up = "----/--/-- --:--";
 
+String th = '00';
+String tr = '00';
+
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
     Future<http.Response> fetchData() async {
@@ -61,6 +63,9 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
     OneSignal.shared.init("df0e685a-2818-43f7-8ecf-a873b48aa4f3");
+    OneSignal.shared
+        .setInFocusDisplayType(OSNotificationDisplayType.notification);
+
     fetchData();
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -71,6 +76,79 @@ class _MyHomePageState extends State<MyHomePage> {
             });
           }),
       backgroundColor: Colors.grey[200],
+      drawer: Drawer(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.only(top: h / 10),
+                height: h / 5,
+                child: Image.asset('assets/logo.png'),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              Text(
+                'An OpenSource Project by FOSS Community NSBM',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Text(
+                'Based on an API Provided by HEALTH PROMOTION BUREAU',
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Text(
+                'For More Information :',
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              Container(
+                width: w / 2,
+                child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(32.0),
+                    ),
+                    child: Text('HPB Website'),
+                    onPressed: () async {
+                      const url = 'https://healthpromo.gov.lk/';
+                      if (await canLaunch(url)) {
+                        await launch(url);
+                      } else {
+                        throw 'Could not launch $url';
+                      }
+                    }),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Container(
+                width: w / 2,
+                child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(32.0),
+                    ),
+                    child: Text('View Source on GitHub'),
+                    onPressed: () async {
+                      const url = 'https://healthpromo.gov.lk/';
+                      if (await canLaunch(url)) {
+                        await launch(url);
+                      } else {
+                        throw 'Could not launch $url';
+                      }
+                    }),
+              ),
+            ],
+          ),
+        ),
+      ),
       appBar: AppBar(
         title: Center(
           child: Column(
@@ -199,7 +277,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: RaisedButton(
                 elevation: 4,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16.0),
+                  borderRadius: BorderRadius.circular(32.0),
                 ),
                 color: Colors.red,
                 child: Text(
@@ -220,7 +298,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: RaisedButton(
                 elevation: 4,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16.0),
+                  borderRadius: BorderRadius.circular(32.0),
                 ),
                 color: Colors.green,
                 child: Text(
