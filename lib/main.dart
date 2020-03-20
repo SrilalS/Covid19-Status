@@ -39,6 +39,7 @@ String up = "----/--/-- --:--";
 
 String th = '00';
 String tr = '00';
+bool pop = true;
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
@@ -92,6 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
     Future<http.Response> fetchData() async {
+      
       final response = await http
           .get('http://hpb.health.gov.lk/api/get-current-statistical');
       if (response.statusCode == 200) {
@@ -102,8 +104,16 @@ class _MyHomePageState extends State<MyHomePage> {
         up = data['data']['update_date_time'].toString();
         setState(() {
           var a;
+          if (pop){
+            pop = false;
+            _popUp();
+      }
         });
       } else {
+        if (pop){
+            pop = false;
+            _popUp();
+          }
         print('Mars First');
       }
     }
@@ -113,13 +123,14 @@ class _MyHomePageState extends State<MyHomePage> {
         .setInFocusDisplayType(OSNotificationDisplayType.notification);
 
     fetchData();
+    
     return Scaffold(
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.refresh),
           onPressed: () {
             setState(() {
               fetchData();
-              _popUp();
+              //_popUp();
             });
           }),
       backgroundColor: Colors.grey[200],
