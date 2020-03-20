@@ -45,6 +45,44 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
+
+    void _popUp() {
+      showDialog(
+        barrierDismissible: true,
+        context: context,
+        builder: (BuildContext context) {
+          return Center(
+              child: Container(
+                  height: w/1.5,
+                  
+                  width: w/1.5,
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Text('Please Wash Your Hands!'),
+                        Image.asset('assets/hands.png', scale: 2,),
+                        RaisedButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(32.0),
+                          ),
+                          child: Text('Okay'),
+                          onPressed: (){
+                          Navigator.pop(context);
+                        }),
+                      ],
+                    ),
+                  )
+                )
+            );
+        },
+      );
+    }
+
     Future<http.Response> fetchData() async {
       final response = await http
           .get('http://hpb.health.gov.lk/api/get-current-statistical');
@@ -73,6 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
           onPressed: () {
             setState(() {
               fetchData();
+              _popUp();
             });
           }),
       backgroundColor: Colors.grey[200],
