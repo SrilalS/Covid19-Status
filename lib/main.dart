@@ -54,9 +54,8 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (BuildContext context) {
           return Center(
               child: Container(
-                  height: w/1.25,
-                  
-                  width: w/1.5,
+                  height: w / 1.25,
+                  width: w / 1.5,
                   child: Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(24),
@@ -65,35 +64,47 @@ class _MyHomePageState extends State<MyHomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        SizedBox(height: 16,),
-                        Text('Please Wash Your Hands before Entering!', 
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
-                        SizedBox(height: 16,),
-                        Image.asset('assets/hands.png', scale: 2.5,),
-                        SizedBox(height: 16,),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        Text(
+                          'Please Wash Your Hands before Entering!',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        Image.asset(
+                          'assets/hands.png',
+                          scale: 2.5,
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
                         RaisedButton(
-                          elevation: 4,
-                          color: Colors.red,
-                          splashColor: Colors.redAccent,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(32.0),
-                          ),
-                          child: Text('Okay', style: TextStyle(color:Colors.white),),
-                          onPressed: (){
-                          Navigator.pop(context);
-                        }),
+                            elevation: 4,
+                            color: Colors.red,
+                            splashColor: Colors.redAccent,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(32.0),
+                            ),
+                            child: Text(
+                              'Okay',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            }),
                       ],
                     ),
-                  )
-                )
-            );
+                  )));
         },
       );
     }
 
     Future<http.Response> fetchData() async {
-      
       final response = await http
           .get('http://hpb.health.gov.lk/api/get-current-statistical');
       if (response.statusCode == 200) {
@@ -101,19 +112,20 @@ class _MyHomePageState extends State<MyHomePage> {
         tc = data['data']['local_total_cases'].toString();
         td = data['data']['local_deaths'].toString();
         nc = data['data']['local_new_cases'].toString();
+        tr = data['data']['local_recovered'].toString();
         up = data['data']['update_date_time'].toString();
         setState(() {
           var a;
-          if (pop){
-            pop = false;
-            _popUp();
-      }
-        });
-      } else {
-        if (pop){
+          if (pop) {
             pop = false;
             _popUp();
           }
+        });
+      } else {
+        if (pop) {
+          pop = false;
+          _popUp();
+        }
         print('Mars First');
       }
     }
@@ -123,7 +135,7 @@ class _MyHomePageState extends State<MyHomePage> {
         .setInFocusDisplayType(OSNotificationDisplayType.notification);
 
     fetchData();
-    
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.refresh),
@@ -329,9 +341,40 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
           Container(
+                margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                height: h * 0.2,
+                width: w * 0.9,
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16.0),
+                  ),
+                  elevation: 4,
+                  //color: Colors.white60,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        'Recovered',
+                        style: TextStyle(color: Colors.green, fontSize: 32),
+                      ),
+                      Text(
+                        tr,
+                        style: TextStyle(
+                            color: Colors.green,
+                            fontSize: 64,
+                            fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+          Container(
             width: w * 0.87,
-            height: h / 10,
-            margin: EdgeInsets.fromLTRB(0, 32, 0, 0),
+            height: h / 12,
+            margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
             child: RaisedButton(
                 elevation: 4,
                 shape: RoundedRectangleBorder(
@@ -351,7 +394,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Container(
             width: w * 0.87,
-            height: h / 10,
+            height: h / 12,
             margin: EdgeInsets.fromLTRB(0, 16, 0, 0),
             child: RaisedButton(
                 elevation: 4,
