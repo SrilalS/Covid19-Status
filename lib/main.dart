@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'COVID-19 Stats - FOSS NSBM',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.blueGrey,
       ),
       home: MyHomePage(title: 'FOSS NSBM - COVID-19 Status'),
     );
@@ -54,9 +54,11 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (BuildContext context) {
           return Center(
               child: Container(
+                  color: Colors.black,
                   height: w / 1.25,
                   width: w / 1.5,
                   child: Card(
+                    color: Colors.black,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(24),
                     ),
@@ -71,7 +73,9 @@ class _MyHomePageState extends State<MyHomePage> {
                           'Please Wash Your Hands before Entering!',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
                         ),
                         SizedBox(
                           height: 16,
@@ -85,14 +89,14 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         RaisedButton(
                             elevation: 4,
-                            color: Colors.red,
-                            splashColor: Colors.redAccent,
+                            color: Colors.white,
+                            splashColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(32.0),
                             ),
                             child: Text(
                               'Okay',
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: Colors.black),
                             ),
                             onPressed: () {
                               Navigator.pop(context);
@@ -145,7 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
               //_popUp();
             });
           }),
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.black,
       drawer: Drawer(
         child: Center(
           child: Column(
@@ -237,10 +241,12 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
         children: <Widget>[
           Container(
+            color: Colors.black,
             margin: EdgeInsets.fromLTRB(0, 8, 0, 0),
             height: h * 0.2,
             width: w * 0.9,
             child: Card(
+              color: Colors.grey[850],
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16.0),
               ),
@@ -254,12 +260,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Text(
                     'Total Cases',
-                    style: TextStyle(color: Colors.orange, fontSize: 32),
+                    style: TextStyle(color: Colors.white, fontSize: 32),
                   ),
                   Text(
                     tc,
                     style: TextStyle(
-                        color: Colors.orange,
+                        color: Colors.white,
                         fontSize: 64,
                         fontWeight: FontWeight.bold),
                   )
@@ -274,6 +280,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: h * 0.2,
                 width: w * 0.45,
                 child: Card(
+                  color: Colors.grey[850],
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16.0),
                   ),
@@ -308,6 +315,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: h * 0.2,
                 width: w * 0.45,
                 child: Card(
+                  color: Colors.grey[850],
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16.0),
                   ),
@@ -321,16 +329,16 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       Text(
                         'New Cases',
-                        style: TextStyle(color: Colors.green, fontSize: 16),
+                        style: TextStyle(color: Colors.amber, fontSize: 16),
                       ),
                       Icon(
                         Icons.note_add,
-                        color: Colors.green,
+                        color: Colors.amber,
                       ),
                       Text(
                         nc,
                         style: TextStyle(
-                            color: Colors.green,
+                            color: Colors.amber,
                             fontSize: 64,
                             fontWeight: FontWeight.bold),
                       )
@@ -341,36 +349,37 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
           Container(
-                margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                height: h * 0.2,
-                width: w * 0.9,
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16.0),
-                  ),
-                  elevation: 4,
-                  //color: Colors.white60,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        'Recovered',
-                        style: TextStyle(color: Colors.green, fontSize: 32),
-                      ),
-                      Text(
-                        tr,
-                        style: TextStyle(
-                            color: Colors.green,
-                            fontSize: 64,
-                            fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                ),
+            margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+            height: h * 0.2,
+            width: w * 0.9,
+            child: Card(
+              color: Colors.grey[850],
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16.0),
               ),
+              elevation: 4,
+              //color: Colors.white60,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    'Recovered',
+                    style: TextStyle(color: Colors.green, fontSize: 32),
+                  ),
+                  Text(
+                    tr,
+                    style: TextStyle(
+                        color: Colors.green,
+                        fontSize: 64,
+                        fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+            ),
+          ),
           Container(
             width: w * 0.87,
             height: h / 12,
@@ -380,7 +389,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(32.0),
                 ),
-                color: Colors.red,
+                color: Colors.grey[600],
                 child: Text(
                   'Main Symptoms',
                   style: TextStyle(color: Colors.white),
@@ -401,7 +410,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(32.0),
                 ),
-                color: Colors.green,
+                color: Colors.grey[600],
                 child: Text(
                   'Prevention Methods',
                   style: TextStyle(color: Colors.white),
