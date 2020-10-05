@@ -151,75 +151,89 @@ class _MyHomePageState extends State<MyHomePage> {
           }),
       backgroundColor: Colors.black,
       drawer: Drawer(
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(top: h / 10),
-                height: h / 5,
-                child: Image.asset('assets/logo.png'),
-              ),
-              SizedBox(
-                height: 16,
-              ),
-              Text(
-                'An OpenSource Project by FOSS Community NSBM',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16),
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              Text(
-                'Based on an API Provided by HEALTH PROMOTION BUREAU',
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              Text(
-                'For More Information :',
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(
-                height: 16,
-              ),
-              Container(
-                width: w / 2,
-                child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(32.0),
-                    ),
-                    child: Text('HPB Website'),
-                    onPressed: () async {
-                      const url = 'https://healthpromo.gov.lk/';
-                      if (await canLaunch(url)) {
-                        await launch(url);
-                      } else {
-                        throw 'Could not launch $url';
-                      }
-                    }),
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              Container(
-                width: w / 2,
-                child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(32.0),
-                    ),
-                    child: Text('View Source on GitHub'),
-                    onPressed: () async {
-                      const url = 'https://github.com/SrilalS/Covid19-Status/';
-                      if (await canLaunch(url)) {
-                        await launch(url);
-                      } else {
-                        throw 'Could not launch $url';
-                      }
-                    }),
-              ),
-            ],
+        child: Container(
+          color: Colors.black,
+          child: Center(
+            child: Column(
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(top: h / 10),
+                  height: h / 5,
+                  child: Image.asset('assets/logoW.png'),
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                Text(
+                  'An OpenSource Project by FOSS Community NSBM',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 16, color: Colors.white),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Text(
+                  'Based on an API Provided by HEALTH PROMOTION BUREAU',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Text(
+                  'For More Information :',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white),
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                Container(
+                  width: w / 2,
+                  child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(32.0),
+                      ),
+                      color: Colors.grey[700],
+                      child: Text(
+                        'HPB Website',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () async {
+                        const url = 'https://healthpromo.gov.lk/';
+                        if (await canLaunch(url)) {
+                          await launch(url);
+                        } else {
+                          throw 'Could not launch $url';
+                        }
+                      }),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Container(
+                  width: w / 2,
+                  child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(32.0),
+                      ),
+                      color: Colors.grey[700],
+                      child: Text(
+                        'View Source on GitHub',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () async {
+                        const url =
+                            'https://github.com/SrilalS/Covid19-Status/';
+                        if (await canLaunch(url)) {
+                          await launch(url);
+                        } else {
+                          throw 'Could not launch $url';
+                        }
+                      }),
+                ),
+              ],
+            ),
           ),
         ),
       ),
