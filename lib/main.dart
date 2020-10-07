@@ -7,12 +7,16 @@ import 'package:fossapp/symp.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/services.dart' ;
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+      ]);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'COVID-19 Stats - FOSS NSBM',
