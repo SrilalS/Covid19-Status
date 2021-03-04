@@ -6,15 +6,15 @@ import 'package:covidstats/symp.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;
-import 'package:url_launcher/url_launcher.dart';
+import 'package:get/get.dart';
+
 
 void main() => runApp(COVIDAPP());
 
 class COVIDAPP extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'COVID-19 Stats - FOSS NSBM',
       theme: ThemeData(
@@ -106,6 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
       );
     }
 
+    /**
     Future<http.Response> fetchData() async {
       final response = await http.get(
           Uri(path: 'http://hpb.health.gov.lk/api/get-current-statistical'));
@@ -131,15 +132,15 @@ class _MyHomePageState extends State<MyHomePage> {
         print('Mars First');
       }
     }
-
-    fetchData();
+**/
+    //fetchData();
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.refresh),
           onPressed: () {
             setState(() {
-              fetchData();
+              //fetchData();
               //_popUp();
             });
           }),
@@ -193,11 +194,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       onPressed: () async {
                         const url = 'https://healthpromo.gov.lk/';
-                        if (await canLaunch(url)) {
-                          await launch(url);
-                        } else {
+                        //if (await canLaunch(url)) {
+                          //await launch(url);
+                       // } else {
                           throw 'Could not launch $url';
-                        }
+                       // }
                       }),
                 ),
                 SizedBox(
@@ -217,11 +218,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       onPressed: () async {
                         const url =
                             'https://github.com/SrilalS/Covid19-Status/';
-                        if (await canLaunch(url)) {
-                          await launch(url);
-                        } else {
-                          throw 'Could not launch $url';
-                        }
+                       /// if (await canLaunch(url)) {
+                          //await launch(url);
+                       // } else {
+                       //   throw 'Could not launch $url';
+                       // }
                       }),
                 ),
               ],
