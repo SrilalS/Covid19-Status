@@ -1,29 +1,27 @@
-reare import 'dart:async';
 import 'dart:convert';
 
+import 'package:covidstats/Home.dart';
+import 'package:covidstats/prev.dart';
+import 'package:covidstats/symp.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fossapp/prev.dart';
-import 'package:fossapp/symp.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter/services.dart' ;
 
-void main() => runApp(MyApp());
+void main() => runApp(COVIDAPP());
 
-class MyApp extends StatelessWidget {
+class COVIDAPP extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-        DeviceOrientation.portraitUp,
-      ]);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'COVID-19 Stats - FOSS NSBM',
       theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
+        brightness: Brightness.dark,
+        primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'FOSS NSBM - COVID-19 Status'),
+      home: Home(),
     );
   }
 }
@@ -58,63 +56,59 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (BuildContext context) {
           return Center(
               child: Container(
-                  color: Colors.black,
-                  height: w / 1.25,
-                  width: w / 1.5,
                   child: Card(
-                    color: Colors.black,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(24),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(
+                  height: 16,
+                ),
+                Text(
+                  'Please Wash Your Hands before Entering!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                Image.asset(
+                  'assets/hands.png',
+                  scale: 2.5,
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                RaisedButton(
+                    elevation: 4,
+                    color: Colors.white,
+                    splashColor: Colors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24),
+                      borderRadius: BorderRadius.circular(32.0),
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 16,
-                        ),
-                        Text(
-                          'Please Wash Your Hands before Entering!',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        Image.asset(
-                          'assets/hands.png',
-                          scale: 2.5,
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        RaisedButton(
-                            elevation: 4,
-                            color: Colors.white,
-                            splashColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(32.0),
-                            ),
-                            child: Text(
-                              'Okay',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            }),
-                      ],
+                    child: Text(
+                      'Okay',
+                      style: TextStyle(color: Colors.black),
                     ),
-                  )));
+                    onPressed: () {
+                      Navigator.pop(context);
+                    }),
+              ],
+            ),
+          )));
         },
       );
     }
 
     Future<http.Response> fetchData() async {
-      final response = await http
-          .get('http://hpb.health.gov.lk/api/get-current-statistical');
+      final response = await http.get(
+          Uri(path: 'http://hpb.health.gov.lk/api/get-current-statistical'));
       if (response.statusCode == 200) {
         Map<String, dynamic> data = jsonDecode(response.body);
         tc = data['data']['local_total_cases'].toString();
@@ -138,10 +132,6 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     }
 
-    OneSignal.shared.init("df0e685a-2818-43f7-8ecf-a873b48aa4f3");
-    OneSignal.shared
-        .setInFocusDisplayType(OSNotificationDisplayType.notification);
-
     fetchData();
 
     return Scaffold(
@@ -153,10 +143,8 @@ class _MyHomePageState extends State<MyHomePage> {
               //_popUp();
             });
           }),
-      backgroundColor: Colors.black,
       drawer: Drawer(
         child: Container(
-          color: Colors.black,
           child: Center(
             child: Column(
               children: <Widget>[
@@ -255,16 +243,12 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
-      body: Center(
+      body: SingleChildScrollView(
           child: Column(
         children: <Widget>[
           Container(
-            color: Colors.black,
-            margin: EdgeInsets.fromLTRB(0, 8, 0, 0),
-            height: h * 0.2,
-            width: w * 0.9,
+
             child: Card(
-              color: Colors.grey[850],
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16.0),
               ),
